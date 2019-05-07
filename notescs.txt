@@ -1,0 +1,34 @@
+a static class cannot be instantiated or derived from, it behaves as if it was both sealed and abstract.
+A virtual function is a member function that you expect to be redefined in derived classes. When you refer to a derived class object using a pointer or a reference to the base class, you can call a virtual function for that object and execute the derived class's version of the function.
+The virtual keyword is used to modify a method, property, indexer, or event declared in the base class and allow it to be overridden in the derived class. The override keyword is used to extend or modify a virtual/abstract method, property, indexer, or event of base class into derived class.
+is it necessary to override a virtual method in C#? The overriding method also provides more than one form for a method. Hence it is also an example for polymorphism. When a method is declared as a virtual method in a base class and that method has the same definition in a derived class then there is no need to override it in the derived class.
+What is difference between abstract and virtual method?Virtual methods have an implementation and provide the derived classes with the option of overriding it. Abstract methods do not provide an implementation and force the derived classes to override the method. So, abstract methods have no actual code in them, and subclasses HAVE TO override the method.
+What is difference between abstract class and virtual class?Exactly. The point is that virtual methods can be overridden in derived classes, while abstract methods must be overridden. Likewise, a class that has at least one abstract method must itself be abstract, i.e. it cannot be instantiated directly since its implementation is (partially) missing.
+an abstract class can force derived classes to provide new method implementations for virtual methods.Because they can never be used as a base class, some run-time optimizations can make calling sealed class members slightly faster.
+An override method provides a new implementation of a member that is inherited from a base class. You cannot override a non-virtual or static method. The overridden base method must be virtual, abstract, or override.You cannot use the new, static, or virtual modifiers to modify an override method.
+
+
+// compile with: -target:library
+public class D
+{
+    public virtual void DoWork(int i)
+    {
+        // Original implementation.
+    }
+}
+
+public abstract class E : D
+{
+    public abstract override void DoWork(int i);
+}
+
+public class F : E
+{
+    public override void DoWork(int i)
+    {
+        // New implementation.
+    }
+}
+seal 因为封好了别人拿不走，因此不能有任何derive
+Virtual 提供给你机会去derive自己
+abstract因为自己抽象 所以一定逼着你下面去有derive自己的东西
